@@ -46,7 +46,7 @@ SIGMA_PRODUCT = 2.3981
 # STATS FOR ACCESS NETWORK
 MEAN_MSAN = 186.63  # AVG NUMBER OF USERS
 SIGMA_MSAN = 90.16  # STD DEVIATION
-NETWORK_SIZE = 50  # ACCESS NETWORK SIZE
+NETWORK_SIZE = 1000  # ACCESS NETWORK SIZE
 MAX_USERS = 720  # MSAN CAPACITY USERS
 # ---------------
 TRAFFIC_DIST_SIZE = 288  # NUMBER OF TRAFFIC ELEMENTS FOR EACH 5 MINUTES AVG FROM 0h TO 24h
@@ -67,7 +67,7 @@ METRO_ETH_ARD_SIGMA = 282.0  # STD DEVIATION
 def main():
 	start_time = time.time()
 	# READING USERS WHICH HAVE BEEN POOLED FOR STATISTICS
-	# VALUES FROM THIS DATASET WILL BE USED TO SIMULATE USER'S
+	# 	VALUES FROM THIS DATASET WILL BE USED TO SIMULATE USER'S
 	# BEHAVIOR OVER TIME.
 
 	#users = create_user_info('users_sampled', 'rra')
@@ -139,6 +139,7 @@ def get_bras_int_data_list():
 def create_access_network(n_access=NETWORK_SIZE, n_ports=MAX_USERS, time_series_entries=TRAFFIC_DIST_SIZE,
 						  access_mean_traffic=MEAN_MSAN, access_sigma_traffic=SIGMA_MSAN,
 						  user_traffic_mean=USER_TRAFFIC_MEAN, user_traffic_sigma=USER_TRAFFIC_SIGMA):
+
 	"""
 	Creates access network matrix based on:
 	:param n_access: Number of Devices of this type
@@ -151,7 +152,7 @@ def create_access_network(n_access=NETWORK_SIZE, n_ports=MAX_USERS, time_series_
 
 	access_t0 = time.time()
 	# CREATE ACCESS NETWORK DEVICE WITH 'MAX_USERS' ACCESS
-	access_network = np.ndarray(shape=(n_access, n_ports, time_series_entries), dtype=np.float32)
+	access_network = np.ndarray(shape=(n_access, n_ports, time_series_entries), dtype=np.float16)
 
 	for i in range(NETWORK_SIZE):
 
